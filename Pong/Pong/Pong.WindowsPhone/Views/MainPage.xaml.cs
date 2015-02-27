@@ -121,5 +121,10 @@ namespace Pong
         {
             _socket.Disconnect();
         }
+
+        private void PageRoot_Loaded(object sender, RoutedEventArgs e)
+        {
+            LogoStoryboard.Begin();
+        }
     }
 }

@@ -37,8 +37,15 @@
         </Border>
         <Button x:Name="LeftButton" Content="Left" HorizontalAlignment="Left" Margin="10,0.5,0,0" Grid.Row="2" VerticalAlignment="Top" Click="LeftButton_Click"/>
         <Button x:Name="RightButton" Content="Right" HorizontalAlignment="Left" Margin="291,0.5,0,0" Grid.Row="2" VerticalAlignment="Top" Click="RightButton_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="27,10,0,0" TextWrapping="Wrap" Text="{Binding Game.Player1.Name}" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="271,23,0,0" TextWrapping="Wrap" Text="{Binding Game.Player2.Name}" VerticalAlignment="Top"/>
+        <StackPanel HorizontalAlignment="Left">
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Game.Player1.Name}" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="0,13,0,0" TextWrapping="Wrap" Text="{Binding Game.Player1.Score}" VerticalAlignment="Top"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Game.Player2.Name}" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Game.Player2.Score}" VerticalAlignment="Top"/>
+
+        </StackPanel>
 
     </Grid>
 </Page>
