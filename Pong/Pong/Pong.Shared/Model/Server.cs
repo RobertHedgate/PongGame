@@ -149,11 +149,18 @@
                 })));
         }
 
+        public void SendChat()
+        {
+            var obj = new JObject { { "message", Chat } };
+            Socket.Emit("message", obj);
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<Player> Players { get; set; }
         public ObservableCollection<ChatMessage> ChatMessages { get; set; }
         public string Name { get; set; }
         public Game Game { get; set; }
         public Result Result { get; set; }
+        public string Chat { get; set; }
     }
 }

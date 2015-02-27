@@ -25,6 +25,8 @@ namespace Pong.Views
         public LobbyPage()
         {
             this.InitializeComponent();
+
+            DataContext = App.GameServer;
         }
 
         /// <summary>
@@ -40,6 +42,11 @@ namespace Pong.Views
         {
             App.GameServer.Ready();
             Frame.Navigate(typeof (GamePage));
+        }
+
+        private void Chat_OnClick(object sender, RoutedEventArgs e)
+        {
+            App.GameServer.SendChat();
         }
     }
 }
