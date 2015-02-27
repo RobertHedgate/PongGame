@@ -1,9 +1,15 @@
 ﻿namespace Pong.Model
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
+    using System.Threading.Tasks;
+    using System.Xml.Linq;
+    using Windows.ApplicationModel.Core;
     using Windows.Foundation;
+    using Windows.UI.Core;
+    using Windows.UI.Xaml;
     using Newtonsoft.Json.Linq;
     using Quobject.SocketIoClientDotNet.Client;
 
@@ -22,14 +28,14 @@
 
             ChatMessages = new ObservableCollection<ChatMessage>();
 
-            Socket.On("players", OnPlayers);
-            Socket.On("message", OnMessage);
-            Socket.On("step", OnStep);
-            Socket.On("winning", OnWinning);
+            Socket.On("players", async x => await OnPlayers(x));
+            Socket.On("message", async x => await OnMessage(x));
+            Socket.On("step", async x => await OnStep(x));
+            Socket.On("winning", async x => await OnWinning(x));
 
         }
 
-        private void OnWinning(object obj)
+        private async Task OnWinning(object obj)
         {
             var jObject = obj as JObject;
             if (jObject == null)
@@ -43,11 +49,12 @@
             };
             if (result.Winner == Game.Player1.Name || result.Winner == Game.Player2.Name)
             {
-                Result = result;
+                await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                CoreDispatcherPriority.Normal, () => Result = result);
             }
         }
 
-        private void OnStep(object obj)
+        private async Task OnStep(object obj)
         {
             var jObject = obj as JObject;
             if (jObject == null)
@@ -65,7 +72,7 @@
                 Score = (int)jObject["players"]["player2"]["score"]
             };
 
-            Game = new Game
+            var game = new Game
             {
                 Ball = new Ball
                 {
@@ -93,9 +100,12 @@
                 Player1 = player1,
                 Player2 = player2
             };
+
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                CoreDispatcherPriority.Normal, () => Game = game);
         }
 
-        private void OnMessage(object obj)
+        private async Task OnMessage(object obj)
         {
             var jObject = obj as JObject;
             if (jObject == null)
@@ -106,7 +116,10 @@
                 Name = (string) jObject["player"],
                 Message = (string)jObject["message"]
             };
-            ChatMessages.Add(message);
+
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                CoreDispatcherPriority.Normal, () => ChatMessages.Add(message));
+            ;
         }
 
         public void LogIn()
@@ -120,18 +133,20 @@
             Socket.Emit("ready");
         }
 
-        private void OnPlayers(object obj)
+        private async Task OnPlayers(object obj)
         {
             var jObject = obj as JObject;
             if (jObject == null)
                 return;
 
-            Players = new ObservableCollection<Player>(jObject["players"].Select(token => new Player
-            {
-                Name = (string)token["name"],
-                State = (string)token["state"],
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                CoreDispatcherPriority.Normal, () =>
+                Players = new ObservableCollection<Player>(jObject["players"].Select(token => new Player
+                {
+                    Name = (string)token["name"],
+                    State = (string)token["state"],
                 
-            }));
+                })));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
