@@ -25,6 +25,7 @@ namespace Pong.Views
         public GamePage()
         {
             this.InitializeComponent();
+            DataContext = App.GameServer;
         }
 
         /// <summary>
@@ -34,6 +35,16 @@ namespace Pong.Views
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+        }
+
+        private void LeftButton_Click(object sender, RoutedEventArgs e)
+        {
+            App.GameServer.Move(-10);
+        }
+
+        private void RightButton_Click(object sender, RoutedEventArgs e)
+        {
+            App.GameServer.Move(10);
         }
     }
 }

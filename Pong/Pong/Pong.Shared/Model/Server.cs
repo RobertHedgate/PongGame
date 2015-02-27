@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Xml.Linq;
+    using Windows.ApplicationModel;
     using Windows.ApplicationModel.Core;
     using Windows.Foundation;
     using Windows.UI.Core;
@@ -19,8 +20,13 @@
 
         public Server()
         {
-            //Socket = IO.Socket("http://jaywaypongserver.herokuapp.com");
-            Socket = IO.Socket("http://10.0.112.126:3000");
+            if (DesignMode.DesignModeEnabled)
+            {
+                return;
+            }
+
+            Socket = IO.Socket("http://jaywaypongserver.herokuapp.com");
+            //Socket = IO.Socket("http://10.0.112.126:3000");
             Socket.On(Socket.EVENT_CONNECT, () =>
             {
                 var i = 0;
@@ -131,6 +137,13 @@
         public void Ready()
         {
             Socket.Emit("ready");
+        }
+
+        public void Move(int direction)
+        {
+            var data = new JObject {{"x", direction}, {"y", 0}};
+            var obj = new JObject {{"paddle", data}};
+            Socket.Emit("move", obj);
         }
 
         private async Task OnPlayers(object obj)
