@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="Pong.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pong"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="Pong" HorizontalAlignment="Center" FontSize="90" Foreground="Aqua"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Enter name:" FontSize="30" VerticalAlignment="Center" Margin="5,0"/>
+                <TextBox Grid.Column="1" Text="{Binding ElementName, Mode=TwoWay}" Margin="5,0"/>
+            </Grid>
+            <Button x:Name="ConnectButton" Content="Connect" Click="ConnectButton_OnClick" HorizontalAlignment="Center" Margin="20"/>
+        </StackPanel>
+    </Grid>
+</Page>
