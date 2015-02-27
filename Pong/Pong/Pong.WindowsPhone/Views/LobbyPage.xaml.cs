@@ -47,6 +47,7 @@ namespace Pong.Views
         private void Chat_OnClick(object sender, RoutedEventArgs e)
         {
             App.GameServer.SendChat();
+            App.GameServer.Chat = "";
         }
     }
 }

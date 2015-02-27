@@ -19,8 +19,8 @@
 
         public Server()
         {
-            //Socket = IO.Socket("http://jaywaypongserver.herokuapp.com");
-            Socket = IO.Socket("http://10.0.112.126:3000");
+            Socket = IO.Socket("http://jaywaypongserver.herokuapp.com");
+            //Socket = IO.Socket("http://10.0.112.126:3000");
             Socket.On(Socket.EVENT_CONNECT, () =>
             {
                 var i = 0;
@@ -118,7 +118,7 @@
             };
 
             await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-                CoreDispatcherPriority.Normal, () => ChatMessages.Add(message));
+                CoreDispatcherPriority.Normal, () => ChatMessages.Insert(0, message));
             ;
         }
 
