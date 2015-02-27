@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
+using Pong.Model;
 
 namespace Pong
 {
@@ -28,6 +29,9 @@ namespace Pong
 #if WINDOWS_PHONE_APP
         private TransitionCollection transitions;
 #endif
+
+        public static Server GameServer = new Server();
+
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code

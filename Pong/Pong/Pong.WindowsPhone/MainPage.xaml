@@ -9,6 +9,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
+        <StackPanel VerticalAlignment="Center">
+            <Button x:Name="ConnectButton" Content="Connect" Click="ConnectButton_OnClick"></Button>
+            <Button x:Name="DisconnectButton" Content="Disconnect" Click="DisconnectButton_OnClick"></Button>
+        </StackPanel>
     </Grid>
 </Page>
