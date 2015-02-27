@@ -22,10 +22,13 @@ namespace Pong.Model
                 var i = 0;
             });
 
+            ChatMessages = new ObservableCollection<ChatMessage>();
+
             Socket.On("players", OnPlayers);
             Socket.On("message", OnMessage);
             Socket.On("step", OnStep);
             Socket.On("winning", OnWinning);
+
         }
 
         private void OnWinning(object obj)
@@ -35,7 +38,24 @@ namespace Pong.Model
 
         private void OnStep(object obj)
         {
-            throw new NotImplementedException();
+            var jObject = obj as JObject;
+            if (jObject == null)
+                return;
+
+            var player1 = new Player
+            {
+                Name = (string) jObject["players"]["player1"]["name"],
+                Score = (int)jObject["players"]["player1"]["score"]
+            };
+
+            var player2 = new Player
+            {
+                Name = (string)jObject["players"]["player2"]["name"],
+                Score = (int)jObject["players"]["player2"]["score"]
+            };
+
+
+
         }
 
         private void OnMessage(object obj)
@@ -49,6 +69,7 @@ namespace Pong.Model
                 Name = (string) jObject["player"],
                 Message = (string)jObject["message"]
             };
+            ChatMessages.Add(message);
         }
 
         public void LogIn()
@@ -75,5 +96,6 @@ namespace Pong.Model
         public ObservableCollection<Player> Players { get; set; }
         public ObservableCollection<ChatMessage> ChatMessages { get; set; }
         public String Name { get; set; }
+        public Game Game { get; set; }
     }
 }
