@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Game.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Paddle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Result.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Server.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseVm.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainPageVm.cs" />

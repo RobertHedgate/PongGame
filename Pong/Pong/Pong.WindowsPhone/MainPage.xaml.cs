@@ -53,7 +53,13 @@ namespace Pong
 
         private void ConnectButton_OnClick(object sender, RoutedEventArgs e)
         {
+            App.GameServer.Name = "Kalle";
             App.GameServer.LogIn();
+            App.GameServer.Ready();
+
+            App.GameServer.Name = "Olle";
+            App.GameServer.LogIn();
+            App.GameServer.Ready();
             ////_socket = IO.Socket("http://localhost:3000");
             ////_socket.On(Socket.EVENT_CONNECT, () =>
             ////{
