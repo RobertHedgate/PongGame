@@ -35,5 +35,11 @@ namespace Pong.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            App.GameServer.Ready();
+            Frame.Navigate(typeof (GamePage));
+        }
     }
 }
