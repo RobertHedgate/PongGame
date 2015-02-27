@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 using Newtonsoft.Json.Linq;
+using Pong.Views;
 using Quobject.SocketIoClientDotNet.Client;
 
 namespace Pong
@@ -54,6 +55,7 @@ namespace Pong
         private void ConnectButton_OnClick(object sender, RoutedEventArgs e)
         {
             App.GameServer.LogIn();
+            Frame.Navigate(typeof (LobbyPage));
             ////_socket = IO.Socket("http://localhost:3000");
             ////_socket.On(Socket.EVENT_CONNECT, () =>
             ////{
