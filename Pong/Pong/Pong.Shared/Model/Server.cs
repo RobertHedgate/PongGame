@@ -23,7 +23,32 @@ namespace Pong.Model
             });
 
             Socket.On("players", OnPlayers);
+            Socket.On("message", OnMessage);
+            Socket.On("step", OnStep);
+            Socket.On("winning", OnWinning);
+        }
 
+        private void OnWinning(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnStep(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnMessage(object obj)
+        {
+            var jObject = obj as JObject;
+            if (jObject == null)
+                return;
+
+            var message = new ChatMessage
+            {
+                Name = (string) jObject["player"],
+                Message = (string)jObject["message"]
+            };
         }
 
         public void LogIn()
@@ -48,6 +73,7 @@ namespace Pong.Model
 
         public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<Player> Players { get; set; }
+        public ObservableCollection<ChatMessage> ChatMessages { get; set; }
         public String Name { get; set; }
     }
 }
